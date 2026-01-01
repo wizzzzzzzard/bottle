@@ -1,0 +1,29 @@
+---
+- name: File module examples using variables
+  hosts: all
+  become: yes
+
+  vars:
+    demo_dir: /tmp/demo
+    demo_file: /tmp/demo/sample.txt
+    file_owner: devops
+    file_group: devops
+    dir_permission: '0755'
+    file_permission: '0644'
+
+  tasks:
+    - name: Create demo directory with variable-based permissions and owner
+      ansible.builtin.file:
+        path: "{{ demo_dir }}"
+        state: directory
+        mode: "{{ dir_permission }}"
+        owner: "{{ file_owner }}"
+        group: "{{ file_group }}"
+
+    - name: Create empty file using variables
+      ansible.builtin.file:
+        path: "{{ demo_file }}"
+        state: touch
+        mode: "{{ file_permission }}"
+        owner: "{{ file_owner }}"
+        group: "{{ file_group }}"
