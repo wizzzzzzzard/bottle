@@ -1,0 +1,15 @@
+---
+- name: Task vars with loop example
+  hosts: all
+
+  tasks:
+    - name: Show list of DevOps tools using task vars and loop
+      debug:
+        msg: "Tool: {{ item }}"
+      vars:
+        devops_tools:
+          - git
+          - docker
+          - kubernetes
+          - ansible
+      loop: "{{ devops_tools }}"
